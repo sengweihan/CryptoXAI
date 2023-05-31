@@ -1,3 +1,6 @@
+#The pre-trained ResNet distinguisher is retrieved from Aron Gohr's
+#Agohr. (n.d.). Agohr/deep_speck: Supplementary code and data to 
+#“improving attacks on round-reduced speck32/64 using Deep Learning.” GitHub. https://github.com/agohr/deep_speck 
 import lime
 import lime.lime_tabular
 from IPython.display import HTML
@@ -17,7 +20,7 @@ net5.load_weights('net5_small.h5')
 # X_EVALUATE AND Y_EVALUATE since the net5 is already a pre-trained model.
 X5, Y5 = sp.make_speck_train_data(10**6, 5)
 
-
+# A prediction class that is made into a function to be passed into the explainer for XAI 
 def prediction(X):
 
     Y_PREDICTED = net5.predict(X, batch_size=10000).flatten()

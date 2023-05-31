@@ -1,3 +1,7 @@
+#This section of the code is retrieved from Aron Gohr's SPECK implementation
+#Gohr, A. (1970a, January 1). Improving attacks on round-reduced speck32/64 using Deep Learning. 
+#Cryptology ePrint Archive. https://eprint.iacr.org/2019/037 
+
 import numpy as np
 from os import urandom
 
