@@ -3,7 +3,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import model_from_json
+# using built-in image processing library instead of OpenCV or PIL to reduce overhead
 import imageio.v2 as imageio
+
 from os import remove 
 from IPython.display import HTML
 from IPython.display import display
@@ -22,6 +24,7 @@ from Simon import SimonCipher
 ##########################################################################################################
 ###################################  SETTING UP THE NEURAL MODELS  #######################################
 
+# Create the CSV file that is repeatedly written to, erased and re-written to plot the analytical data
 csv_file = open('results.csv','w');
 csv_file.write('');
 csv_file.write('Accuracy,TPR,TNR,MSE,High Random\n');
@@ -35,20 +38,18 @@ net5 = model_from_json(json_model);
 net6 = model_from_json(json_model);
 net7 = model_from_json(json_model);
 net8 = model_from_json(json_model);
-net8 = model_from_json(json_model);
 
 net5.load_weights('net5_small.h5');
 net6.load_weights('net6_small.h5');
 net7.load_weights('net7_small.h5');
 net8.load_weights('net8_small.h5');
 
-# net9.load_weights('net8_small.h5');
-
 ##########################################################################################################
 ##########################################################################################################
 ##########################################################################################################
 
-def evaluate(net,X,Y): # evaluating section
+# evaluating the results predicted by the neural distinguisher
+def evaluate(net,X,Y): 
     """
     Evaluates the neural distinguisher on the data (X,Y).
     X: input data
@@ -74,6 +75,7 @@ def evaluate(net,X,Y): # evaluating section
     csv_file.close();
     print("Percentage of random pairs with score higher than median of real pairs:", 100*high_random);
 
+# plot a mutliple bar graph for the currrent data in the CSV file
 def plot_multiple_bar_graph(from_filename, title = 'Results', save_as="results.png"):
     """
     Plot the graphs of the results stored in file_name.
@@ -130,8 +132,6 @@ def plot_multiple_bar_graph(from_filename, title = 'Results', save_as="results.p
     plt.ylabel('Normalized Value');
     
     ax.xaxis.set_ticklabels([])
-
-
     plt.savefig(save_as);
     
     # clear our al the data in the CSV file except the first line
@@ -140,9 +140,9 @@ def plot_multiple_bar_graph(from_filename, title = 'Results', save_as="results.p
     file.write("Accuracy,TPR,TNR,MSE,High Random\n")
     file.close()
 
-##########################################################################################################
-##########################################################################################################
-##########################################################################################################
+###########################################################################################################
+###########################################################################################################
+################################################## SPECK ##################################################
 
 NUM_SAMPLES = 10**6
 X5,Y5 = speck.make_speck_train_data( n = NUM_SAMPLES , nr = 5 );
@@ -152,7 +152,6 @@ X8,Y8 = speck.make_speck_train_data( n = NUM_SAMPLES , nr = 8 );
 
 print("CHECKING")
 X5r, Y5r = speck.real_differences_data( n = NUM_SAMPLES , nr = 5);
-# print("X5R" , sp.real_differences_data(NUM_SAMPLES,5))
 X6r, Y6r = speck.real_differences_data( n = NUM_SAMPLES , nr = 6);
 X7r, Y7r = speck.real_differences_data( n = NUM_SAMPLES , nr = 7);
 X8r, Y8r = speck.real_differences_data( n = NUM_SAMPLES , nr = 8);
@@ -195,30 +194,30 @@ imageio.imwrite('speck_comp.png' , np.concatenate((img_1 , img_2) , axis = 1) )
 remove('results_speck_5_6_7_8.png')
 remove('results_speck_5r_6r_7r_8r.png')
 
-##########################################################################################################
-##########################################################################################################
-##########################################################################################################
+###########################################################################################################
+###########################################################################################################
+################################################## SIMON ##################################################
+
+# For this case (i.e. this OOP implementation of SIMON), multiple instances of the SimonCipher class 
+# is created by manipulating the block_size & key_size parameters to get the correct number of 
+# encryption rounds
 
 NUM_SAMPLES = 10**6;  
 simon5 = SimonCipher( key = 0x1918111009080100 , block_size = 32 , key_size = 64 );
 simon6 = SimonCipher( key = 0x1918111009080100 , block_size = 32 , key_size = 96 );
 simon7 = SimonCipher( key = 0x1918111009080100 , block_size = 32 , key_size = 128 );
 simon8 = SimonCipher( key = 0x1918111009080100 , block_size = 32 , key_size = 192 );
-# simon9 = SimonCipher( key = 0x1918111009080100 , block_size = 32 , key_size = 192 );
 
 X5,Y5 = simon5.make_simon_train_data( n = NUM_SAMPLES );
 X6,Y6 = simon6.make_simon_train_data( n = NUM_SAMPLES );
 X7,Y7 = simon7.make_simon_train_data( n = NUM_SAMPLES );
 X8,Y8 = simon8.make_simon_train_data( n = NUM_SAMPLES );
-# X9,Y9 = simon8.make_simon_train_data( n = NUM_SAMPLES );
 
 print("CHECKING")
 X5r, Y5r = simon5.real_differences_data( n = NUM_SAMPLES );
-# print("X5R" , simon5.real_differences_data( NUM_SAMPLES ))
 X6r, Y6r = simon6.real_differences_data( n = NUM_SAMPLES );
 X7r, Y7r = simon7.real_differences_data( n = NUM_SAMPLES );
 X8r, Y8r = simon8.real_differences_data( n = NUM_SAMPLES );
-# X9r, Y9r = simon9.real_differences_data( n = NUM_SAMPLES );
 
 print('Testing neural distinguishers against 5 to 8 blocks in the ordinary real vs random setting');
 print('5 rounds:');
@@ -229,8 +228,6 @@ print('7 rounds:');
 evaluate(net7, X7, Y7);
 print('8 rounds:');
 evaluate(net8, X8, Y8);
-# print('9 rounds:');
-# evaluate(net9, X9, Y9);
 
 plot_multiple_bar_graph(
     from_filename='results.csv', 
@@ -247,8 +244,6 @@ print('7 rounds:');
 evaluate(net7, X7r, Y7r);
 print('8 rounds:');
 evaluate(net8, X8r, Y8r);
-# print('9 rounds:');
-# evaluate(net9, X9r, Y9r);
 
 plot_multiple_bar_graph(
     from_filename='results.csv', 
@@ -266,12 +261,9 @@ remove('results_simon_5r_6r_7r_8r.png')
 ##########################################################################################################
 ##########################################################################################################
 
-
 # concatenating all the results into one image  
-
 img_1 = np.array( imageio.imread('speck_comp.png') )
 img_2 = np.array( imageio.imread('simon_comp.png') )
-
 imageio.imwrite('results.png' , np.concatenate((img_1 , img_2) , axis = 0) )
 
 ##########################################################################################################

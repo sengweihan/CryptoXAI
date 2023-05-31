@@ -96,10 +96,14 @@ This file contains the generation of graph for Lime explainability on the predic
 
 ## Citation:
 
-The **SPECK.py** and **pre-trained distinguisher** is retrieved from:
+The **Speck.py** and **pre-trained distinguisher** files were retrieved from:
 
-*Agohr. (n.d.). Agohr/deep_speck: Supplementary code and data to 
-“improving attacks on round-reduced speck32/64 using Deep Learning.” 
-GitHub. https://github.com/agohr/deep_speck*
+_Agohr. (n.d.). Agohr/deep_speck: Supplementary code and data to 
+“improving attacks on round-reduced speck32/64 using Deep Learning.”_ 
+* GitHub Link: *https://github.com/agohr/deep_speck*
 
+The **Simon.py** file was retrieved from:
 
+_inmcm/Simon_Speck_Ciphers: Implementations of the Speck & Simon 
+Block Ciphers._
+* Github Link: *https://github.com/inmcm/Simon_Speck_Ciphers*

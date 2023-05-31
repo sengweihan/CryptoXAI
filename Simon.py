@@ -8,6 +8,15 @@ import ast
 
 __author__ = 'inmcm'
 
+"""
+ACKNOWLEDGEMENT:
+This code has been extracted from the public Github repository authored 
+by Calvin McCoy, linked here: https://github.com/inmcm/Simon_Speck_Ciphers
+
+CHANGES MADE BY GROUP MCS5:
+ * Added more valid setup configurations for a block size of 32 bits 
+   (see modified line 35 vs. original line 42)
+"""
 
 class SimonCipher(object):
     """Simon Block Cipher Object"""
@@ -59,9 +68,6 @@ class SimonCipher(object):
             print('Please use one of the following block sizes:', [x for x in self.__valid_setups.keys()])
             raise
 
-        # print('Block Size:', self.block_size, 'bits')
-        # print('Word Size:', self.word_size, 'bits')
-
         # Setup Number of Rounds, Z Sequence, and Key Size
         try:
             self.rounds, self.zseq = self.possible_setups[key_size]
@@ -70,9 +76,6 @@ class SimonCipher(object):
             print('Invalid key size for selected block size!!')
             print('Please use one of the following key sizes:', [x for x in self.possible_setups.keys()])
             raise
-
-        # print('Number of Rounds:', self.rounds)
-        # print('Key Size:', self.key_size, 'bits')
 
         # Create Properly Sized bit mask for truncating addition and left shift outputs
         self.mod_mask = (2 ** self.word_size) - 1
@@ -456,16 +459,10 @@ class SimonCipher(object):
 
 
 
-if __name__ == "__main__":
-
-    # data = 0x65656877
-
-    # w = SimonCipher(key=0x1918111009080100, key_size=64, block_size=32)
-    # t = w.encrypt(data)   # 0x65656877 = "?eehw" = 1701144695
-    # print("\nEncrypted:", t)
-    # t_i = w.decrypt(t)
-    # print("Decrypted:", t_i)
-    # print("Original:", data, "\n")
-    # print("Successful?:"    ,   "Yes" if (data == t_i) else "No"    ,   "\n")
-    
-    pass
+# if __name__ == "__main__":
+#     data = 0x65656877 # a random plaintext
+#     w = SimonCipher(key=0x1918111009080100, key_size=64, block_size=32) # instantiating SimonCipher instance
+#     t = w.encrypt(data)         ; print("\nEncrypted:", t)
+#     t_i = w.decrypt(t)          ; print("Decrypted:", t_i)    
+#     print("Original Plaintext:", data, "\n")
+#     print("Decryption successful?:"    ,   "Yes" if (data == t_i) else "No"    ,   "\n")
