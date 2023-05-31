@@ -67,5 +67,29 @@ It must also be made sure that the following hardware specifications are met:
 ## Description on files:
 
 ### Comparative_Analysis.py
-This file contains the comparative analysis done between SPECK and SIMON.We have tested the encryption algorithm with a pre-trained ResNet model. 
+This file contains the comparative analysis done between SPECK and SIMON.We have tested the encryption algorithm with a pre-trained ResNet model. Just run the code and a png file named results.png will pop showing the comparative analysis between SPECK and SIMON.
+
+![image.png](./image.png)
+*Figure 1: Shows the comparative analysis between SPECK and SIMON in results.png*
+
+
+### ExplainableAI.py
+This file contains the generation of graph for Lime explainability on the prediction made by ResNet. After running the code, a file named lime_explanation.png will be produced which contains the output of Explainable AI.
+
+![image-1.png](./image-1.png)
+
+*Figure 2: Shows the explainability on the prediction of ResNet in lime_explanation.png*
+
+**Understanding the Explainable AI output**
+
+**Class 1:** The class that shows that an relationship still exist between the ciphertext.
+
+**Y-axis:** Shows the bit position and its binary value.
+
+**X-axis:** Shows the contribution value.
+
+**Green bar:** Positive contribution towards the prediction result.
+
+**Red bar:** Negative contribution towards the prediction result.
+
 
