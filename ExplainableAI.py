@@ -40,4 +40,4 @@ explaination = explainer.explain_instance(
 # Visualisation
 fig = explaination.as_pyplot_figure(label=1)
 fig.savefig("lime_explanation.png")
-print(explaination.as_list())
+
