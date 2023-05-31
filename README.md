@@ -93,3 +93,13 @@ This file contains the generation of graph for Lime explainability on the predic
 **Red bar:** Negative contribution towards the prediction result.
 
 
+
+## Citation:
+
+The **SPECK.py** and **pre-trained distinguisher** is retrieved from:
+
+*Agohr. (n.d.). Agohr/deep_speck: Supplementary code and data to 
+“improving attacks on round-reduced speck32/64 using Deep Learning.” 
+GitHub. https://github.com/agohr/deep_speck*
+
+
