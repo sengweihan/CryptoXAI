@@ -47,6 +47,12 @@ and run the following command:
 
 **pip install lime**
 
+### ImageIO
+To install this lightweight image utility library, you can use the pip package 
+manager. Open a terminal window and run the following command:
+
+**pip install imageio**
+
 ## Hardware Specification: 
 It must also be made sure that the following hardware specifications are met:
 
