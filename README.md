@@ -69,6 +69,8 @@ It must also be made sure that the following hardware specifications are met:
 ### Comparative_Analysis.py
 This file contains the comparative analysis done between SPECK and SIMON.We have tested the encryption algorithm with a pre-trained ResNet model. Just run the code and a png file named results.png will pop showing the comparative analysis between SPECK and SIMON.
 
+(Note: The SIMON code may take approximately 5-10 minutes to start computing due to the complexity of its algorithm)
+
 ![image.png](./image.png)
 *Figure 1: Shows the comparative analysis between SPECK and SIMON in results.png*
 
