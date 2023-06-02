@@ -115,3 +115,23 @@ The **Simon.py** file was retrieved from:
 _inmcm/Simon_Speck_Ciphers: Implementations of the Speck & Simon 
 Block Ciphers._
 * Github Link: *https://github.com/inmcm/Simon_Speck_Ciphers*
+
+## Contacts us for queries:
+**Technical lead**
+
+Lahiru Weliwitaya 
+
+lwel0005@student.monash.edu
+
+**Quality Assurance**
+
+Seng Wei Han
+
+wsen0004@student.monash.edu
+
+**Project Manager**
+
+Neevashinie Paramasivan
+
+npar0015@student.monash.edu
+
